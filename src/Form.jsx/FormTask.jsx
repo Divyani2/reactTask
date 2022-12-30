@@ -7,6 +7,9 @@ import Table from './Table';
 const FormTak = () => {
   const [input, setinput] = useState({ userName: '', email: '' });
   const [data, setdata] = useState([])
+  const[toggle, setToggle]= useState(true)
+  const[editData, setEditData]= useState(null)
+
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -15,11 +18,33 @@ const FormTak = () => {
   };
 
  let{userName,email}= input; 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, index) => {
     e.preventDefault();
-   setdata([...data,{userName,email}])
-   setinput({userName: '', email: '' })
-   console.log(input)
+    if(input.userName===""){
+      console.log("notworking")
+    }
+   else if(input && toggle===false){
+    console.log("toggle")
+     setdata(
+      data.map((elem,index)=>{
+        console.log(index)
+        if(index === editData){
+          console.log("check")
+          console.log(input.userName)
+          return{...elem, userName:input.userName, email:input.email}
+        }else{
+          console.log("not working")
+        }
+        return elem;
+      }),
+      setinput({userName: '', email: '' }),
+      setToggle(true)
+     )
+    }else{
+      setdata([...data,{userName,email}])
+      setinput({userName: '', email: '' })
+      console.log(input)
+    }
   };
 
   const onDelete = (index) =>{
@@ -36,10 +61,12 @@ const FormTak = () => {
      const editedData = data.filter((elem,i)=>{
          return index===i;
      }) 
-     console.log(editedData)
+     setToggle(false)
+ console.log(editedData)
+
+     setinput({userName:editedData[0].userName, email:editedData[0].email})
+     setEditData(index)
    }
-
-
 
  
   return (
@@ -62,10 +89,10 @@ const FormTak = () => {
           label='Email'
         />
         <br />
-
-        <button type='submit' onClick={handleSubmit}>
+        { toggle? <button type='submit' onClick={handleSubmit}>
           Submit
-        </button>
+        </button>:<button onClick={handleSubmit}>Update</button>}
+        
       </form>
       <Table tableData={data} onClick1={onDelete} onClick2={onEdit} />
     </>

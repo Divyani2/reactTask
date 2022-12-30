@@ -15,6 +15,9 @@ import FormTak from './Form.jsx/FormTask';
 //import UncontrolledForm from './component/UncontrolledForm';
 // import StateUp from './component/StateUp';
 //import Form from './TODOLIST/Form';
+// import UseReducer from './component/Hooks/UseReducer';
+// import UseEffect from './component/Hooks/UseEffect';
+// import Useimperative from './component/Hooks/Useimperative';
 
 
 function App() {
@@ -37,7 +40,10 @@ function App() {
       </ContextProvider>
       <HOC />
       <HOC2 /> */}
-      <FormTak/>
+       <FormTak/> 
+      {/* <UseReducer/> */}
+      {/* <UseEffect/>
+      <Useimperative/> */}
     </div>
   )
 }
