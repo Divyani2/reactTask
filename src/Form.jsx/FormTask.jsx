@@ -6,10 +6,9 @@ import Table from './Table';
 
 const FormTak = () => {
   const [input, setinput] = useState({ userName: '', email: '' });
-  const [data, setdata] = useState([])
-  const[toggle, setToggle]= useState(true)
-  const[editData, setEditData]= useState(null)
-
+  const [data, setdata] = useState([]);
+  const [toggle, setToggle] = useState(true);
+  const [editData, setEditData] = useState(null);
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -17,58 +16,55 @@ const FormTak = () => {
     setinput({ ...input, [name]: value });
   };
 
- let{userName,email}= input; 
+  let { userName, email } = input;
   const handleSubmit = (e, index) => {
     e.preventDefault();
-    if(input.userName===""){
-      console.log("notworking")
-    }
-   else if(input && toggle===false){
-    console.log("toggle")
-     setdata(
-      data.map((elem,index)=>{
-        console.log(index)
-        if(index === editData){
-          console.log("check")
-          console.log(input.userName)
-          return{...elem, userName:input.userName, email:input.email}
-        }else{
-          console.log("not working")
-        }
-        return elem;
-      }),
-      setinput({userName: '', email: '' }),
-      setToggle(true)
-     )
-    }else{
-      setdata([...data,{userName,email}])
-      setinput({userName: '', email: '' })
-      console.log(input)
+    if (input.userName === '') {
+      console.log('notworking');
+    } else if (input && toggle === false) {
+      console.log('toggle');
+      setdata(
+        data.map((elem, index) => {
+          console.log(index);
+          if (index === editData) {
+            console.log('check');
+            console.log(input.userName);
+            return { ...elem, userName: input.userName, email: input.email };
+          } else {
+            console.log('not working');
+          }
+          return elem;
+        }),
+        setinput({ userName: '', email: '' }),
+        setToggle(true)
+      );
+    } else {
+      setdata([...data, { userName, email }]);
+      setinput({ userName: '', email: '' });
+      console.log(input);
     }
   };
 
-  const onDelete = (index) =>{
-    console.log(index)
-     const deletedData = data.filter((elem,i)=>{
-         return index!==i;
-     }) 
-     console.log(deletedData)
-     setdata(deletedData)
-   }
- 
-   const onEdit = (index) =>{
-    console.log(index)
-     const editedData = data.filter((elem,i)=>{
-         return index===i;
-     }) 
-     setToggle(false)
- console.log(editedData)
+  const onDelete = (index) => {
+    console.log(index);
+    const deletedData = data.filter((elem, i) => {
+      return index !== i;
+    });
+    console.log(deletedData);
+    setdata(deletedData);
+  };
 
-     setinput({userName:editedData[0].userName, email:editedData[0].email})
-     setEditData(index)
-   }
+  const onEdit = (index) => {
+    console.log(index);
+    const editedData = data.filter((elem, i) => {
+      return index === i;
+    });
+    setToggle(false);
+    console.log(editedData);
+    setinput({ userName: editedData[0].userName, email: editedData[0].email });
+    setEditData(index);
+  };
 
- 
   return (
     <>
       <form>
@@ -78,7 +74,7 @@ const FormTak = () => {
           value={input.userName}
           onChange={handleOnChange}
           label='Name'
-                                                                />
+        />
         <br />
 
         <InputBox
@@ -89,10 +85,13 @@ const FormTak = () => {
           label='Email'
         />
         <br />
-        { toggle? <button type='submit' onClick={handleSubmit}>
-          Submit
-        </button>:<button onClick={handleSubmit}>Update</button>}
-        
+        {toggle ? (
+          <button type='submit' onClick={handleSubmit}>
+            Submit
+          </button>
+        ) : (
+          <button onClick={handleSubmit}>Update</button>
+        )}
       </form>
       <Table tableData={data} onClick1={onDelete} onClick2={onEdit} />
     </>
