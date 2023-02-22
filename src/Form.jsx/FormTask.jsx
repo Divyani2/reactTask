@@ -31,7 +31,7 @@ const FormTak = () => {
             console.log(input.userName);
             return { ...elem, userName: input.userName, email: input.email };
           } else {
-            console.log('not working');
+            console.log('not working 2');
           }
           return elem;
         }),
@@ -47,18 +47,14 @@ const FormTak = () => {
 
   const onDelete = (index) => {
     console.log(index);
-    const deletedData = data.filter((elem, i) => {
-      return index !== i;
-    });
+    const deletedData = data.filter((elem, i) => index !== i);
     console.log(deletedData);
     setdata(deletedData);
   };
 
   const onEdit = (index) => {
     console.log(index);
-    const editedData = data.filter((elem, i) => {
-      return index === i;
-    });
+    const editedData = data.filter((elem, i) => index === i);
     setToggle(false);
     console.log(editedData);
     setinput({ userName: editedData[0].userName, email: editedData[0].email });

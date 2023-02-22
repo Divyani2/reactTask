@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import FormTak from './Form.jsx/FormTask';
+import Task from './comTask/Task';
+// import FormTak from './Form.jsx/FormTask';
 // import Context from './component/Context';
 // import { ContextProvider } from './component/CreateContext';
 // import HOC from './component/HOC';
@@ -40,10 +41,11 @@ function App() {
       </ContextProvider>
       <HOC />
       <HOC2 /> */}
-       <FormTak/> 
+       {/* <FormTak/>  */}
       {/* <UseReducer/> */}
       {/* <UseEffect/>
       <Useimperative/> */}
+      <Task/>
     </div>
   )
 }
